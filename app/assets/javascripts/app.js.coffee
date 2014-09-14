@@ -104,6 +104,8 @@ GameApp.controller "GameCtrl", [ "$scope", "$http", "$routeParams", ($scope, $ht
 		$scope.gameOver = false
 		# changed for test, for production should be false
 		$scope.wordSaved = false
+		for character in $scope.alphabet 
+			character.chosen = false
 
 	$scope.init
 
