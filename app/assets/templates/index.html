@@ -1,0 +1,70 @@
+<!-- index.html -->
+<div ng-controller="GameCtrl" data-ng-init="init()" class="game">
+	<div ng-hide="gameOver" class="playGame">
+		<h1>Non-violent word guessing game aka Hangman</h1>
+		<!-- game setup -->
+		<!-- enter a word which will be your secret word -->
+		<div ng-hide="wordSaved" class="playerOne">
+			<h2>Player One: Choose your secret word</h2>
+			<form action="javascript:void(0);" ng-submit="submitSecretWord(word)">
+				<fieldset>
+					<input type="text" ng-model="word.secret" placeholder="Type secret word" autofocus required>
+					<button>Save as Secret Word</button>
+				</fieldset>
+			</form>
+		</div>
+
+		<!-- Player Two part of game, activated on saving of secret word -->
+		<div ng-show="wordSaved" class="playerTwo">
+			<!-- update player on status, whether chosen letter is in word -->
+			<h2>Player Two: {{message}}</h2>
+			<!-- display secret word # of empty underlined spaces -->
+			<!-- display of correctly selected letters -->
+			<div ng-repeat="letter in secrets " class="results"> 
+				<div class="letter" ng-hide="letter.guessed">
+					_{{letter.chr}}
+				</div>
+				<div class="letter-guessed" ng-show="letter.guessed">
+					{{letter.chr}}
+				</div>
+			</div>
+
+			<!-- will become "hangman" image, tracking of wrong guesses -->
+			<!-- once reaches maxGuesses, game is over -->
+			<h3>Strikes: {{strikes}}</h3>
+
+<!-- 			show letters of alphabet, allow player to guess letters
+			mark which have been chosen -->
+			<h3>Choose a letter</h3>
+			<div ng-repeat="character in alphabet" class="alphabet">
+				<div class="character" ng-click="letterChosen(character)" ng-hide="character.chosen">
+					{{character.chr}}
+				</div>
+				<div class="character-chosen" ng-show="character.chosen">
+					{{character.chr}}
+				</div>
+				
+			</div>
+
+
+
+
+
+			<!-- a display for wrong letters/guesses -->
+
+
+
+			<!-- when a letter is entered, check if it is in the secret word -->
+			<!-- if it is in the secret word, display all instances of the letter -->
+
+			<!-- if the entire word has been guessed, it's a winning case -->
+
+		</div><!-- closes player 2 div -->
+	</div> <!-- closes play game -->
+	<div ng-show="gameOver" class="gameOver">
+		<h1>GAME OVER</h1>
+	</div><!-- closes gameOver div -->
+	<div ng-click="init()" class="reset playGame" ng-show="wordSaved">
+		<h2>Start new game?</h2>
+	</div><!-- closes reset -->
+</div>
